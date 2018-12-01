@@ -11,7 +11,9 @@ time bwa index hg38.fa
 #                   -  代表从pipe流出的数据
 #                   -q minimum mapping quality
 for i in {1..6};do
-time bwa mem -t 10 -M /ref_path/hg38 \
+time bwa mem -t \
+-R "@RG\tID:<ID>\tLB:<LIBRARY_NAME>\tSM:<SAMPLE_NAME>\tPL:ILLUMINA" \
+10 -M /ref_path/hg38 \
 /sample_path/L${i}_R1.fastp.fastq.gz \
 /sample_path/L${i}_R2.fastp.fastq.gz \
 | samtools view -S -b - -q 20 -o \
