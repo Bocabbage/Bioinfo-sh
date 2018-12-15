@@ -2,8 +2,10 @@
 # 更新时间：2018\11\29(已验证)
 # 更新时间：2018\12\15 变量替代、建立目录使其成为流程模块，完善注释
 reference=/home/pgstu1/group0/reference/index/hg19.fasta
-bwa=/home/tools/bwa
 outdir=/home/pgstu2/group2/output
+bwa=/home/tools/bwa
+samtools=/home/tools/samtools
+
 
 #Start Directory: $outdir/cleandata
 mkdir bwa_results
@@ -23,6 +25,6 @@ time $bwa mem -t \
 10 -M $reference \
 $outdir/cleandata/L${i}_R1.fastp.fastq.gz \
 $outdir/cleandata/L${i}_R2.fastp.fastq.gz \
-| samtools view -S -b - -q 20 -o \
-$outdir/bwa_results/KPGP-00001_L$i.hg38.bam
+| $samtools view -S -b - -q 20 -o \
+$outdir/bwa_results/KPGP-00001_L$i.hg19.bam
 done
