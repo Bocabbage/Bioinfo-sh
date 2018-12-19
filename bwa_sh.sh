@@ -14,7 +14,7 @@ time bwa index $reference
 # 比对过程(PE测序，分Lane按顺序跑)
 # bwa_args:         -t 线程数
 #                   -R 参考基因组
-#					-M Mark shorter split hits as secondary (for Picard compatibility).
+#                   -M Mark shorter split hits as secondary (for Picard compatibility).
 # samtools_args:    -b 将结果压缩为.bam格式
 #                   -S 默认输入为.sam格式
 #                   -  代表从pipe流出的数据
