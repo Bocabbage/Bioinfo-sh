@@ -3,7 +3,6 @@
 # 更新时间：2018\12\19(增加SnpSift注释vcf的内容：注释rs号)
 gatk=/home/pgstu1/group0/database/gatk-4.0.11.0/gatk
 snpEff=/home/pgstu2/group2/snpEff
-ref=/home/pgstu1/group0/database/1000genome
 resource=/home/pgstu1/group0/Data/gatk
 results=/home/pgstu2/group2
 # 由于对SNP和INDEL的硬过滤标准不同，需先拆分过滤再合并
@@ -42,9 +41,21 @@ time $gatk MergeVcfs \
 -I $results/KPGP.HC.snp.filter.vcf.gz \
 -O $results/KPGP.HC.filter.vcf.gz
 
-gzip $results/KPGP.HC.filter.vcf.gz
+# 下载dbSNP库参考内容
+cd $results
+mkdir ref
+cd ref
 
-# 利用gatk的database完成rs号注释
+wget ftp://ftp.ncbi.nih.gov/snp/organisms/human_9606_b150_GRCh37p13/VCF/\
+All_20170710.vcf.gz
+
+wget ftp://ftp.ncbi.nih.gov/snp/organisms/human_9606_b150_GRCh37p13/VCF/\
+All_20170710.vcf.gz.tbi
+
+gzip -d $results/KPGP.HC.filter.vcf.gz
+
+# rs号注释
 time java -jar $snpEff/SnpSift.jar \
-annotate $ref/1000G_phase1.snps.high_confidence.hg19.sites.vcf \
-> $results/KPGP.HC.filter.vcf &
+annotate $results/ref/All_20170710.vcf.gz \
+$results/KPGP.HC.filter.vcf \
+> $results/KPGP.HC.filter.dbSNP.vcf &
