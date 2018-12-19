@@ -1,6 +1,9 @@
-# 用于.vcf(.gz)文件硬过滤(需安装：GATK4)
+# 用于.vcf(.gz)文件硬过滤(需安装：GATK4 SnpSift)
 # 更新时间：2018\12\18(已验证)
+# 更新时间：2018\12\19(增加SnpSift注释vcf的内容：注释rs号)
 gatk=/home/pgstu1/group0/database/gatk-4.0.11.0/gatk
+snpEff=/home/pgstu2/group2/snpEff
+ref=/home/pgstu1/group0/database/1000genome
 resource=/home/pgstu1/group0/Data/gatk
 results=/home/pgstu2/group2
 # 由于对SNP和INDEL的硬过滤标准不同，需先拆分过滤再合并
@@ -38,3 +41,10 @@ time $gatk MergeVcfs \
 -I $results/KPGP.HC.indel.filter.vcf.gz \
 -I $results/KPGP.HC.snp.filter.vcf.gz \
 -O $results/KPGP.HC.filter.vcf.gz
+
+gzip $results/KPGP.HC.filter.vcf.gz
+
+# 利用gatk的database完成rs号注释
+time java -jar $snpEff/SnpSift.jar \
+annotate $ref/1000G_phase1.snps.high_confidence.hg19.sites.vcf \
+> $results/KPGP.HC.filter.vcf &
