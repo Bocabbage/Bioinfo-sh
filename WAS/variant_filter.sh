@@ -58,4 +58,4 @@ gzip -d $results/KPGP.HC.filter.vcf.gz
 time java -jar $snpEff/SnpSift.jar \
 annotate $results/ref/All_20170710.vcf.gz \
 $results/KPGP.HC.filter.vcf \
-> $results/KPGP.HC.filter.dbSNP.vcf &
+> $results/KPGP.HC.filter.dbSNP.vcf 
