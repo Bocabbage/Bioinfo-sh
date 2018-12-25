@@ -1,4 +1,4 @@
-# 原始数据质控
+# 原始数据质控(需安装：fastqc+Trimmomatic)
 # 更新时间：2018\12\25(圣诞节写脚本.jpg)
 #Start Directory: $indir
 indir=/home/pgstu2/group2/rawdata
