@@ -1,5 +1,6 @@
 # 注释变异结果(需安装:SnpEff/annovar)
 # 更新时间：2018\12\12(已验证)
+# 更新时间：2018\12\27(增加查看SNP变异总结列表)
 # 工作目录：/home/pgstu2/group2
 snpEff=/home/pgstu2/group2/biotools/snpEff
 annovar=/home/pgstu2/group2/biotools/annovar
@@ -34,3 +35,5 @@ time $annovar/annotate_variation.pl \
 -out ex1 -dbtype gwasCatalog \
 $vcf/KPGP.HC.filter.dbSNP.annovar humandb/
 
+# 查看得到的注释结果总结：
+#cut -f 2 ex1.hg19_gwasCatalog | sort | uniq -c | sort -k1 -n -r | less
