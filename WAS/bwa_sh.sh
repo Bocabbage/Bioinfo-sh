@@ -22,7 +22,7 @@ time bwa index $reference
 for i in {1..6};do
 time $bwa mem -t \
 -R "@RG\tID:Lane${i}\tLB:00001\tSM:KPGP\tPL:ILLUMINA" \
-10 -M $reference \
+-t 10 -M $reference \
 $outdir/cleandata/L${i}.paired.1.fq.gz \
 $outdir/cleandata/L${i}.paired.2.fq.gz \
 | $samtools view -S -b - -q 20 -o \

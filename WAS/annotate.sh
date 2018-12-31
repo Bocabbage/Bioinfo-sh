@@ -18,11 +18,15 @@ $vcf/KPGP.HC.filter.dbSNP.varType
 # .annovar文件为变异分类信息
 # ex1.hg19_gwasCatalog为注释结果
 
-#变异分类
+# 变异分类
 time $annovar/convert2annovar.pl -format vcf4old \
 $vcf/KPGP.HC.filter.dbSNP.vcf > \
 $vcf/KPGP.HC.filter.dbSNP.annovar 
 # 下载GWAS注释数据库
+#time perl $annovar/annotate_variation.pl -downdb \
+#-buildver hg19 \
+#-webfrom annovar \
+#refGene humandb/
 time $annovar/annotate_variation.pl \
 -build hg19 \
 -downdb gwasCatalog humandb/ 
@@ -37,3 +41,4 @@ $vcf/KPGP.HC.filter.dbSNP.annovar humandb/
 
 # 查看得到的注释结果总结：
 #cut -f 2 ex1.hg19_gwasCatalog | sort | uniq -c | sort -k1 -n -r | less
+
