@@ -2,6 +2,6 @@
 
 ## Contents
 
-* [x] WGS(Genome-wide association study)
-* [ ] RNA-seq
-* [ ] ATAC-seq
+ * [x] WGS(Genome-wide association study)
+ * [ ] RNA-seq
+ * [ ] ATAC-seq
