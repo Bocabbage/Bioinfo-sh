@@ -7,7 +7,12 @@ cd $HOME/zzf
 
 INPUTPATH="./callpeaks"
 OUTPATH="./anno_motif"
-mkdir OUTPATH
+
+if [ ! -d "$OUTPATH" ];then
+    mkdir $OUTPATH
+else
+    rm $OUTPATH/*
+fi
 
 export PATH=/home/lihm/software/HOMER/bin/:$PATH
 

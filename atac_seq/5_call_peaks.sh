@@ -10,7 +10,13 @@ INPUTPATH="./bam/atac_seq"
 OUTPATH="./callpeaks"
 TOOLPATH="/home/lihm/anaconda2/bcbio/usr/local/bin"
 
-mkdir $OUTPATH
+
+if [ ! -d "$OUTPATH" ];then
+    mkdir $OUTPATH
+else
+    rm $OUTPATH/*
+fi
+
 export PATH=$TOOLPATH:$PATH
 
 

@@ -9,7 +9,12 @@ SRA_LIST=(SRR2920574 SRR2920572)
 INPUTPATH="./sra/atac_seq"
 OUTPATH="./fastq/atac_seq"
 TOOLPATH="./tools"
-mkdir $OUTPATH
+
+if [ ! -d "$OUTPATH" ];then
+    mkdir $OUTPATH
+else
+    rm $OUTPATH/*
+fi
 
 export PATH=$TOOLPATH:$PATH
 

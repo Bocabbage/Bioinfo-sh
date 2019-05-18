@@ -10,7 +10,11 @@ INPUTPATH="./bam/rna_seq"
 OUTPATH="./stringtie"
 TOOLPATH="/home/lihm/anaconda2/bcbio/usr/local/bin"
 
-mkdir $OUTPATH
+if [ ! -d "$OUTPATH" ];then
+    mkdir $OUTPATH
+else
+    rm $OUTPATH/*
+fi
 
 for sra in "${SRA_LIST[@]}"
 do

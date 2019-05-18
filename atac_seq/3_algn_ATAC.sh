@@ -10,7 +10,12 @@ INPUTPATH="./fastq/atac_seq"
 OUTPATH="./bam/atac_seq"
 TOOLPATH="/home/lihm/anaconda2/bcbio/usr/local/bin"
 export PATH=$TOOLPATH:$PATH
-mkdir $OUTPATH
+
+if [ ! -d "$OUTPATH" ];then
+    mkdir $OUTPATH
+else
+    rm $OUTPATH/*
+fi
 
 for sra in "${SRA_LIST[@]}"
 do

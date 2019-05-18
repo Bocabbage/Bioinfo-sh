@@ -9,8 +9,20 @@ OUTPATH='./fastq/rna_seq'
 SRA_LIST=(SRR2753137 SRR2753131 SRR2753135 SRR2753130)
 
 cd $HOME/zzf
-mkdir ./fastq
-mkdir $OUTPATH
+
+if [ ! -d "./fastq" ];then
+    mkdir ./fastq
+else
+    rm ./fastq/*
+fi
+
+
+if [ ! -d "$OUTPATH" ];then
+    mkdir $OUTPATH
+else
+    rm $OUTPATH/*
+fi
+
 
 ls $INPUTPATH/*.sra | while read i; do $TOOLPATH/fastq-dump --split-3 -O $OUTPATH $i; done
 

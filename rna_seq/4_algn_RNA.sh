@@ -24,7 +24,12 @@ mkdir $OUTPATH
 for sra in "${SRA_LIST[@]}"
 do
     BAMDIR=$OUTPATH/$sra
-    mkdir $BAMDIR
+   
+    if [ ! -d "$BAMDIR" ];then
+        mkdir $BAMDIR
+    else
+        rm $BAMDIR/*
+    fi
 
     STAR --runThreadN 20 --genomeDir /mnt/work/lihm/GRCH_37 \
          --readFilesIn ${INPUTPATH}/${sra}_1.fastq ${INPUTPATH}/${sra}_2.fastq \
