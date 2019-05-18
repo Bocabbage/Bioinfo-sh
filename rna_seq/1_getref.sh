@@ -1,4 +1,4 @@
-#!usr/bin/env bash
+#!/usr/bin/env bash
 # title:            1_getref.sh
 # recommand usage:  nohup 1_getref.sh > getref.log 2>&1 &
 # author:           Zhuofan Zhang

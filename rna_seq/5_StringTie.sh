@@ -1,4 +1,4 @@
-#! /usr/bin/env bash
+#!/usr/bin/env bash
 # title:            5_StringTie.sh
 # recommand usage:  nohup bash 5_StringTie.sh > StringTie.log 2>&1 &
 # author:           Zhuofan Zhang

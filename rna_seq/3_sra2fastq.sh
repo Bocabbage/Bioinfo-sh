@@ -1,4 +1,4 @@
-#!usr/bin/env bash
+#!/usr/bin/env bash
 # title:            3_sra2fastq.sh
 # recommand usage:  nohup bash 3_sra2fastq.sh > sra2fastq.log 2>&1 &
 # author:           Zhuofan Zhang

@@ -1,4 +1,4 @@
-#! /usr/bin/env bash
+#!/usr/bin/env bash
 # title:            6_seq_counts.sh
 # recommand usage:  nohup bash 6_seq_counts.sh > seq_counts.log 2>&1 &
 # author:           Zhuofan Zhang
