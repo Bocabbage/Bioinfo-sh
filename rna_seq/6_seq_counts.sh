@@ -10,6 +10,8 @@ INPUTPATH="./bam/rna_seq"
 OUTPATH="./counts"
 TOOLPATH="/home/lihm/anaconda2/bcbio/usr/local/bin"
 
+export PATH=$TOOLPATH:$PATH
+
 if [ ! -d "$OUTPATH" ];then
     mkdir $OUTPATH
 else
@@ -18,10 +20,10 @@ fi
 
 for sra in "${SRA_LIST[@]}"
 do
-    $TOOLPATH/samtools view $INPUTPATH/$sra/${sra}Aligned.sortedByCoord.out.bam | \
-    $TOOLPATH/htseq-count -f sam  -s no -i gene_name \
-                          - /mnt/work/lihm/GRCH_37/gencode.v30lift37.annotation.gtf \
-                          > $OUTPATH/${sra}.geneCounts
+    samtools view $INPUTPATH/$sra/${sra}Aligned.sortedByCoord.out.bam | \
+    htseq-count -f sam  -s no -i gene_name \
+                - /mnt/work/lihm/GRCH_37/gencode.v30lift37.annotation.gtf \
+                > $OUTPATH/${sra}.geneCounts
 done
 
 echo "Finish!"
