@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
-# title:            2_download_sra.sh
-# recommand usage:  nohup bash 2_download_sra.sh > download_sra.sh 2>&1 &
+# title:            1_download_sra.sh
+# recommand usage:  nohup bash 1_download_sra.sh > download_sra.sh 2>&1 &
 # author:           Zhuofan Zhang
-# date:             2019/5/15
+# date:             2019/5/17
 cd $HOME/zzf
 
-SRA_LIST=(SRR2920574 SRR2920572 SRR2753137 SRR2753131 SRR2753135 SRR2753130)
-OUTPATH="./sra/rna_seq"
+SRA_LIST=(SRR2920574 SRR2920572)
+OUTPATH="./sra/atac_seq"
 TOOLPATH="/home/lihm/software/sratoolkit.2.8.2-1-ubuntu64/bin"
 
 mkdir $OUTPATH
-cd $OUTPATH
+#cd $OUTPATH
 
 for sra in "${SRA_LIST[@]}"
 do
