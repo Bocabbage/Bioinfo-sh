@@ -10,8 +10,18 @@ INPUTPATH="./fastq"
 OUTPATH="./bam/rna_seq"
 TOOLPATH="/home/lihm/anaconda2/bcbio/usr/local/bin"
 export PATH=$TOOLPATH:$PATH
-mkdir ./bam
-mkdir $OUTPATH
+if [ ! -d "./bam" ];then
+    mkdir ./bam
+else
+    rm ./bam/*
+fi
+
+
+if [ ! -d "$OUTPATH" ];then
+    mkdir $OUTPATH
+else
+    rm $OUTPATH/*
+fi
 
 # Build Index #
 # STAR --runThreadN 6 --runMode genomeGenerate \
