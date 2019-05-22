@@ -7,6 +7,7 @@ TOOLPATH='/home/lihm/software/sratoolkit.2.8.2-1-ubuntu64/bin/'
 INPUTPATH='./sra/rna_seq'
 OUTPATH='./fastq/rna_seq'
 SRA_LIST=(SRR2753137 SRR2753131 SRR2753135 SRR2753130)
+export PATH=$TOOLPATH:$PATH
 
 cd $HOME/zzf
 
@@ -24,7 +25,7 @@ else
 fi
 
 
-ls $INPUTPATH/*.sra | while read i; do $TOOLPATH/fastq-dump --split-3 -O $OUTPATH $i; done
+ls $INPUTPATH/*.sra | while read i; do fastq-dump --split-3 -O $OUTPATH $i; done
 
 # Most reads are at the quality level above 25, so we skip the QC step. #
 # for sra in "${SRA_LIST[@]}"

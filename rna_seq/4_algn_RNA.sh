@@ -10,6 +10,7 @@ INPUTPATH="./fastq"
 OUTPATH="./bam/rna_seq"
 TOOLPATH="/home/lihm/anaconda2/bcbio/usr/local/bin"
 export PATH=$TOOLPATH:$PATH
+
 if [ ! -d "./bam" ];then
     mkdir ./bam
 else

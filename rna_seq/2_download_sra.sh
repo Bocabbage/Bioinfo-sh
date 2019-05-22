@@ -22,7 +22,7 @@ do
     $TOOLPATH/prefetch -v $sra;
 done
 
-fi
+
 mv $HOME/ncbi/public/sra/*.sra $OUTPATH
 
 echo "SRA Download Finish!"
