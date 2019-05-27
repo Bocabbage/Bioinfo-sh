@@ -21,7 +21,6 @@ for sra in "${SRA_LIST[@]}"
 do
     BAMDIR=$OUTPATH/$sra
     mkdir $BAMDIR
-
     bowtie2 -X 1000 -p 20 -x /home/database/hg19/bowtie2_index/hg19.fa \
                       -1 $INPUTPATH/${sra}_1.fastp.fastq -2 $INPUTPATH/${sra}_2.fastp.fastq -S $BAMDIR/${sra}.sam
     samtools sort -n -O sam $BAMDIR/${sra}.sam | samtools fixmate -m -O bam - $BAMDIR/${sra}.fixmate.bam
