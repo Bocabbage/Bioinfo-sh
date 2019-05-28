@@ -3,5 +3,5 @@
 ## Contents
 
  * [x] WGS(Genome-wide association study)
- * [x] RNA-seq
- * [x] ATAC-seq
+ * [ ] RNA-seq
+ * [ ] ATAC-seq
