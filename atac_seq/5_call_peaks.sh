@@ -3,12 +3,15 @@
 # recommand usage:  nohup bash 5_call_peaks.sh > call_peaks.log 2>&1 &
 # author:           Zhuofan Zhang
 # date:             2019/5/18
+#                   2019/5/29(Divide samples into pHSC/Blast)
 cd $HOME/zzf
 
-SRA_LIST=(SRR2920574 SRR2920572)
+SU_ID=(SU444 SU484 SU496)
+pHSC=(SRR2920574 SRR2920575 SRR2920577)
+Blast=(SRR2920572 SRR2920576 SRR2920579)
+
 INPUTPATH="./bam/atac_seq"
 OUTPATH="./callpeaks"
-TOOLPATH="/home/lihm/anaconda2/bcbio/usr/local/bin"
 
 
 if [ ! -d "$OUTPATH" ];then
@@ -17,11 +20,13 @@ else
     rm $OUTPATH/*
 fi
 
-export PATH=$TOOLPATH:$PATH
+for i in $(seq 0 2)
+do
+    mkdir $OUTPATH/"{SU_ID[$i]}"
+    macs2 callpeak -t $INPUTPATH/"${pHSC[$i]}"/"${pHSC[$i]}".sorted.dedup.q30.bam \
+                   -c $INPUTPATH/"${Blast[$i]}"/"${Blast[$i]}".sorted.dedup.q30.bam \
+                   -g hs -B -f BAMPE -n example -q 0.01 --outdir=$OUTPATH/"{SU_ID[$i]}"
 
 
-macs2 callpeak -t $INPUTPATH/${SRA_LIST[0]}/${SRA_LIST[0]}.sorted.dedup.q30.bam \
-               -c $INPUTPATH/${SRA_LIST[1]}/${SRA_LIST[1]}.sorted.dedup.q30.bam \
-               -g hs -B -f BAMPE -n example -q 0.00001 --outdir=$OUTPATH
 
 echo "PeakCalling finish!"

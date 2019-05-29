@@ -18,7 +18,7 @@ fastq-dump --split-3 -O $OUTPATH $INPUTDATA
 ## Sequence Quality Control
 * We need to do Quality-Control for the sequence data, including checking the sequence-score, trimming the adapters.(Sometimes we need to 'cut off' the low-quality reads.)
 
-* Tools: FastQC+NGmerge / fastp
+* Tools: [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)+[NGmerge](https://github.com/jsh58/NGmerge) / [fastp](https://github.com/OpenGene/fastp)
 
 * Remove Adapters
 
@@ -27,7 +27,7 @@ fastq-dump --split-3 -O $OUTPATH $INPUTDATA
 
 ## Read Mapping
 
-* Use Bowtie2 for reads-mapping.
+* Use [Bowtie2](https://github.com/BenLangmead/bowtie2) for reads-mapping.
 
 ```
 Build Index:
@@ -46,3 +46,15 @@ Reads Mapping:
 ```
 
 ## Markdup/Map quality Control
+
+* Use [samtools](https://github.com/samtools/samtools) for fixmate-sort-markdup-filt and [QualiMap](http://qualimap.bioinfo.cipf.es/) for Quality-Report producing.
+* Before Fixmate, the SAM/BAM file must be sorted by query name.
+* Before markdup, the SAM/BAM file must be fixmated.
+
+## PeakCalling
+
+* Use [MACS2](https://github.com/taoliu/MACS) for peakcalling
+
+## PeakAnnotation/MotifFinding
+
+* Use [HOMMER](http://homer.ucsd.edu/homer/index.html) for peak-annotation and motif-finding
