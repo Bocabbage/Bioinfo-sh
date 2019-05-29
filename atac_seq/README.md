@@ -25,7 +25,7 @@ fastq-dump --split-3 -O $OUTPATH $INPUTDATA
 ![rmAdapters](figs/Remove-adapters.png)
 
 
-## Read Mapping
+## Reads Mapping
 
 * Use [Bowtie2](https://github.com/BenLangmead/bowtie2) for reads-mapping.
 
