@@ -1,6 +1,6 @@
 # ATAC-seq Data Analysis Workflow
 
-![workflow](figs/Workflow.png)
+![workflow](figs/WorkFlow.png)
 
 ## Data Gathering
 * The ATAC-seq data used in this worklow is a subset of the analysis:[NCBI](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5042844/).
