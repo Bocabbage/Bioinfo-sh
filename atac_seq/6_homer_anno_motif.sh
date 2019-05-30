@@ -25,10 +25,12 @@ fi
 for su in "${SU_ID[@]}"
 do
     mkdir $OUTPATH/${su}
-    annotatePeaks.pl $INPUTPATH/${su}/example_peaks.narrowPeak hg19 > \
-                     $OUTPATH/${su}/example_peaks.annotated
+    annotatePeaks.pl $INPUTPATH/${su}/${su}_peaks.narrowPeak hg19 > \
+                     $OUTPATH/${su}/${su}_peaks.annotated
 
-    findMotifsGenome.pl $INPUTPATH/${su}/example_peaks.narrowPeak hg19 $OUTPATH/${su}/
+    mkdir $OUTPATH/${su}/Motif-Finding
+
+    findMotifsGenome.pl $INPUTPATH/${su}/${su}_peaks.narrowPeak hg19 $OUTPATH/${su}/Motif-Finding
 done
 
 
