@@ -17,7 +17,7 @@ else
     rm $OUTPATH/*
 fi
 
-export PATH=$TOOLPATH:$PATH
+# export PATH=$TOOLPATH:$PATH
 
 ls $INPUTPATH/*.sra | while read i; do $TOOLPATH/sratoolkit.2.8.2-1-ubuntu64/bin/fastq-dump --split-3 -O $OUTPATH $i; done
 # --split-3 parameter for pair-end seq data: to split .sra into _1.fq+_2.fq
