@@ -5,10 +5,10 @@
 # date:             2019/5/15
 cd $HOME/zzf
 
-SRA_LIST=(SRR2753137 SRR2753131 SRR2753135 SRR2753130)
+SRA_LIST=(SRR2753135 SRR2753137 SRR2753139 SRR2753140 SRR2753141 SRR2753143)
 INPUTPATH="./bam/rna_seq"
 OUTPATH="./stringtie"
-TOOLPATH="/home/lihm/anaconda2/bcbio/usr/local/bin"
+TOOLPATH="./tools"
 
 if [ ! -d "$OUTPATH" ];then
     mkdir $OUTPATH

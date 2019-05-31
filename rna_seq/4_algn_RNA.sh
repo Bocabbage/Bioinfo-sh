@@ -3,12 +3,13 @@
 # recommand usage:  nohup bash 4_algn_RNA.sh > algn_RNA.log 2>&1 &
 # author:           Zhuofan Zhang
 # date:             2019/5/15
+
 cd $HOME/zzf
 
-SRA_LIST=(SRR2753137 SRR2753131 SRR2753135 SRR2753130)
-INPUTPATH="./fastq"
+SRA_LIST=(SRR2753135 SRR2753137 SRR2753139 SRR2753140 SRR2753141 SRR2753143)
+INPUTPATH="./fastq/rna_seq"
 OUTPATH="./bam/rna_seq"
-TOOLPATH="/home/lihm/anaconda2/bcbio/usr/local/bin"
+TOOLPATH="./tools"
 export PATH=$TOOLPATH:$PATH
 
 if [ ! -d "./bam" ];then

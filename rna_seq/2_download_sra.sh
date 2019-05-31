@@ -3,11 +3,18 @@
 # recommand usage:  nohup bash 2_download_sra.sh > download_sra.sh 2>&1 &
 # author:           Zhuofan Zhang
 # date:             2019/5/15
+#                   2019/5/31
 cd $HOME/zzf
 
-SRA_LIST=(SRR2920574 SRR2920572 SRR2753137 SRR2753131 SRR2753135 SRR2753130)
+SRA_LIST=(SRR2753135 SRR2753137 SRR2753139 SRR2753140 SRR2753141 SRR2753143)
 OUTPATH="./sra/rna_seq"
-TOOLPATH="/home/lihm/software/sratoolkit.2.8.2-1-ubuntu64/bin"
+TOOLPATH="./tools/sratoolkit.2.8.2-1-ubuntu64/bin"
+
+if [ ! -d ./ref ];then
+    mkdir ./ref
+else
+    rm $OUTPATH/*
+fi
 
 if [ ! -d "$OUTPATH" ];then
     mkdir $OUTPATH
