@@ -4,10 +4,11 @@
 # author:           Zhuofan Zhang
 # date:             2019/5/18
 #                   2019/5/29(Add SU-ID and divide the samples)
+#                   2019/6/2
 cd $HOME/zzf
 
 SU_ID=(SU444 SU484 SU496)
-INPUTPATH="./callpeaks"
+INPUTPATH="./callpeaks/Merge"
 OUTPATH="./anno_motif"
 TOOLPATH="./tools"
 
@@ -25,12 +26,12 @@ fi
 for su in "${SU_ID[@]}"
 do
     mkdir $OUTPATH/${su}
-    annotatePeaks.pl $INPUTPATH/${su}/${su}_peaks.narrowPeak hg19 > \
-                     $OUTPATH/${su}/${su}_peaks.annotated
+    annotatePeaks.pl $INPUTPATH/${su}/${su}_merge.bed hg19 > \
+                     $OUTPATH/${su}/${su}_merge_peaks.annotated
 
     mkdir $OUTPATH/${su}/Motif-Finding
 
-    findMotifsGenome.pl $INPUTPATH/${su}/${su}_peaks.narrowPeak hg19 $OUTPATH/${su}/Motif-Finding
+    findMotifsGenome.pl $INPUTPATH/${su}/${su}_merge.bed hg19 $OUTPATH/${su}/Motif-Finding
 done
 
 
