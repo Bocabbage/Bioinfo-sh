@@ -54,7 +54,9 @@ Reads Mapping:
 ## PeakCalling
 
 * Use [MACS2](https://github.com/taoliu/MACS) for peakcalling
-* Here is the method: set pHSC as the treatment-group and Blast as the control group, PeakCalling. Then, set Blast as the treatment-group and pHSC as the control group, PeakCalling again. We merge them and sort them by coordinates, and use [bedtools](https://bedtools.readthedocs.io/en/latest/index.html) for overlapp-merge.  
+* Here is the method: set pHSC as the treatment-group and Blast as the control group, PeakCalling. Then, set Blast as the treatment-group and pHSC as the control group, PeakCalling again. We merge them and sort them by coordinates, and use [bedtools](https://bedtools.readthedocs.io/en/latest/index.html) for overlap-merge.
+
+![merge](figs/bedtools-merge.png)  
 
 ## PeakAnnotation/MotifFinding
 
