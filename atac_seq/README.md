@@ -61,3 +61,9 @@ Reads Mapping:
 ## PeakAnnotation/MotifFinding
 
 * Use [HOMMER](http://homer.ucsd.edu/homer/index.html) for peak-annotation and motif-finding
+* we need 'hg19'(the same reference genome in reads-mapping step) and its annotation information. As we use HOMER(series of perl scripts), we can download and use files through HOMER:
+
+```
+    perl configureHomer.pl -install hg19
+```
+
