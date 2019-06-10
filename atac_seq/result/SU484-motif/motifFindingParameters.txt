@@ -1,0 +1,1 @@
+cmd = ../ATACpeakCalling/Merge/SU484_merge.bed hg19 ./SU484-motif/
