@@ -11,7 +11,7 @@ BLAT:
     blat DATABASE.fa QUERY.fa -out=blast8 blatresult
 
 USEARCH:
-    usearch -usearch_global QUERY.fa -db DATABASE.fa -id 0.9 -blast6out hits.b6 \
-            -strand plus -maxaccept 8 -maxrejects 256
+    usearch11.0.667_i86linux32 -usearch_global QUERY.fa -db DATABASE.fa -id 0.9 -blast6out hits.b6 \
+            -strand plus -maxaccepts 8 -maxrejects 256
 ```
 
