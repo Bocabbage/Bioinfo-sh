@@ -7,11 +7,10 @@
 WORKPATH=/hwfssz1/BIGDATA_COMPUTING/liwenhui/1.Etools/1.SAtools
 
 ## BLAST Download and Install ##
-# wget -P $WORKPATH/1.BLAST/ ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.9.0+-x64-linux.tar.gz
-wget -P $WORKPATH/1.BLAST/ ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.2.31+-x64-linux.tar.gz
+wget -P $WORKPATH/1.BLAST/ ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.9.0+-x64-linux.tar.gz
 tar -zxvf $WORKPATH/1.BLAST/ncbi-blast-2.9.0+-x64-linux.tar.gz
 
-## BLAT Download and Install ##
+## Blat Download and Install ##
 wget -P $WORKPATH/2.BLAT/ https://users.soe.ucsc.edu/~kent/src/blatSrc.zip
 cd $WORKPATH/2.BLAT
 unzip ./blatSrc.zip
