@@ -1,6 +1,6 @@
 # Script: Performance.py
-# Description: 
-# Update date: 2019/07/11
+# Description: For calculating the accuracy of different SA-tools.
+# Update date: 2019/07/12
 # Author: Zhuofan Zhang 
 
 from Bio import SeqIO
@@ -29,6 +29,7 @@ def ResultPreProcess(results_path):
 def TrueResultsNum(id_lists,result):
     TrueResult = 0
     with open(result,'r') as r:
+       align_num = 0
        for line in r.readlines():
             qSeq,bSeq = line.split('\t')[0:2]
             #print(qSeq,bSeq)
@@ -41,7 +42,8 @@ def TrueResultsNum(id_lists,result):
                 elif (qIN and bIN):
                     TrueResult += 1
                     break
-    return TrueResult
+            align_num += 1
+    return TrueResult,align_num
 
 def GetAccuracy(fasta_list,results_list):
     ''' For calculating the accuracy of the SA-tools'''
@@ -54,13 +56,13 @@ def GetAccuracy(fasta_list,results_list):
        id_lists.append([seq_record.id for seq_record in family])
     for result in results_list:
          TrueResults.append(TrueResultsNum(id_lists,result))
-    return TrueResults    
+    return [x[0]/x[1] for x in TrueResults]    
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--fapath',help='Family Fasta file dir.')
 parser.add_argument('--repath',help='result files dir.')
 args = parser.parse_args()
-print(args.fapath)
+#print(args.fapath)
 fasta_list = [ args.fapath + '/' + x for x in os.listdir(args.fapath)]
 results_list = ResultPreProcess([args.repath + '/' + x for x in os.listdir(args.repath)])
 print(results_list)

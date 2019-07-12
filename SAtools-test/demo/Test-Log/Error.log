@@ -1,0 +1,8 @@
+nohup: ignoring input and appending output to ‘nohup.out’
+00:00 37Mb      0.1% Reading /hwfssz1/BIGDATA_COMPUTING/liwenhui/1.Etools/1.SAtools/TEST-DEMO/Sample-Result/database.fa00:00 45Mb    100.0% Reading /hwfssz1/BIGDATA_COMPUTING/liwenhui/1.Etools/1.SAtools/TEST-DEMO/Sample-Result/database.fa
+00:00 12Mb      0.1% Masking (fastnucleo)                                                                              00:00 12Mb    100.0% Masking (fastnucleo)
+00:00 12Mb      0.1% Word stats          00:01 12Mb     76.1% Word stats00:01 12Mb    100.0% Word stats
+00:01 12Mb    100.0% Alloc rows
+00:01 22Mb      0.1% Build index00:01 22Mb    100.0% Build index
+00:01 56Mb   CPU has 32 cores, defaulting to 10 threads
+00:01 56Mb      0.1% Searching query.fa, 0.0% matched00:01 152Mb   100.0% Searching query.fa, 66.0% matched

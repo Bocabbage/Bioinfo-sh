@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 # Script: sampling.sh
-# Description: Random extracting 1,000 sequences as 'query' from the database and the remainder as the 'database'
+# Description: Random extracting 100 sequences as 'query' from the database and the remainder as the 'database'
 # Update date: 2019/07/10
 # Author: Zhuofan Zhang
 # Problem: Rfam database has redundant sequence(Solved)
