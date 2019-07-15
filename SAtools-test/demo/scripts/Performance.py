@@ -1,6 +1,6 @@
 # Script: Performance.py
 # Description: For calculating the accuracy of different SA-tools.
-# Update date: 2019/07/12
+# Update date: 2019/07/15
 # Author: Zhuofan Zhang 
 
 from Bio import SeqIO
@@ -9,7 +9,14 @@ import argparse
 
 
 def ResultPreProcess(results_path):
-    '''For Results pre-processing'''
+    '''
+       For Results pre-processing:
+       Extract the queries id 
+       of those who have the highest scores.
+       Parameter: results_path -- the path of result file(s).
+       Output:    Text file(s).
+       Note that results are blast-format6.
+    '''
     pro_results_list=[]
     for result_path in results_path:
         qSeq_list = {}
@@ -27,6 +34,13 @@ def ResultPreProcess(results_path):
     return pro_results_list
 
 def TrueResultsNum(id_lists,result):
+    '''
+       For each preprocess-result file(s),
+       calculate the 'TRUE-ALIGN-RESULT' nums.
+       Parameter: id_lists -- databases' id lists.(list of lists)
+                  result   -- One Alignment result.
+       Output:    True-ALIGN-RESULT nums, ALL-ALIGN-RESULT nums
+    '''
     TrueResult = 0
     with open(result,'r') as r:
        align_num = 0
@@ -46,7 +60,7 @@ def TrueResultsNum(id_lists,result):
     return TrueResult,align_num
 
 def GetAccuracy(fasta_list,results_list):
-    ''' For calculating the accuracy of the SA-tools'''
+    ''' For calculating the accuracy(ratio) of the SA-tools'''
     fasta_parse_list=[]
     TrueResults = []
     for fasta_file in fasta_list:
@@ -56,7 +70,7 @@ def GetAccuracy(fasta_list,results_list):
        id_lists.append([seq_record.id for seq_record in family])
     for result in results_list:
          TrueResults.append(TrueResultsNum(id_lists,result))
-    return [x[0]/x[1] for x in TrueResults]    
+    return [(x[0]/x[1],x[0],x[1]) for x in TrueResults]    
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--fapath',help='Family Fasta file dir.')
@@ -65,7 +79,7 @@ args = parser.parse_args()
 #print(args.fapath)
 fasta_list = [ args.fapath + '/' + x for x in os.listdir(args.fapath)]
 results_list = ResultPreProcess([args.repath + '/' + x for x in os.listdir(args.repath)])
-print(results_list)
+print([os.path.split(x)[1] for x in results_list])
 TrueResults = GetAccuracy(fasta_list,results_list)
 print(TrueResults)
 
