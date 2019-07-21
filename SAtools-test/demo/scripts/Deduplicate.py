@@ -18,11 +18,12 @@ def sequence_cleaner(fasta_file,outputfile):
                 ofile.write(">" + seq_record.id + " " + seq_record.description + "\n" + sequence + "\n")
     print("Deduplication finished!")
 
-parser = argparse.ArgumentParser()
-parser.add_argument('--input',help='input file path/name.')
-parser.add_argument('--output',help='output file path/name.')
-args = parser.parse_args()
+
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--input',help='input file path/name.')
+    parser.add_argument('--output',help='output file path/name.')
+    args = parser.parse_args()
     sequence_cleaner(args.input,args.output)
 

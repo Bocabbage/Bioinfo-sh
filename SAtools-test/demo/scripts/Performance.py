@@ -72,15 +72,16 @@ def GetAccuracy(fasta_list,results_list):
          TrueResults.append(TrueResultsNum(id_lists,result))
     return [(x[0]/x[1],x[0],x[1]) for x in TrueResults]    
 
-parser = argparse.ArgumentParser()
-parser.add_argument('--fapath',help='Family Fasta file dir.')
-parser.add_argument('--repath',help='result files dir.')
-args = parser.parse_args()
-#print(args.fapath)
-fasta_list = [ args.fapath + '/' + x for x in os.listdir(args.fapath)]
-results_list = ResultPreProcess([args.repath + '/' + x for x in os.listdir(args.repath)])
-print([os.path.split(x)[1] for x in results_list])
-TrueResults = GetAccuracy(fasta_list,results_list)
-print(TrueResults)
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--fapath',help='Family Fasta file dir.')
+    parser.add_argument('--repath',help='result files dir.')
+    args = parser.parse_args()
+    #print(args.fapath)
+    fasta_list = [ args.fapath + '/' + x for x in os.listdir(args.fapath)]
+    results_list = ResultPreProcess([args.repath + '/' + x for x in os.listdir(args.repath)])
+    print([os.path.split(x)[1] for x in results_list])
+    TrueResults = GetAccuracy(fasta_list,results_list)
+    print(TrueResults)
 
 
