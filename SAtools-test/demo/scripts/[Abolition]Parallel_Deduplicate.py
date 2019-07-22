@@ -1,11 +1,17 @@
+# Can be replaced simply by :
+# awk '/^>/{f=!d[$1];d[$1]=1}f' $input > $ output
+# and the awk command is much moooooooooore faster.
+
+# "I'm a foolish man with only a hummer named python, my BRO."
+
 # Script: Parallel_Deduplicate.py
 # Description: For database(FASTA) deduplication(Parallel Version)
-# Update date: 2019/07/21(unfinished)
+# Update date: 2019/07/22
 # Author: Zhuofan Zhang
 
 import argparse
 import os
-import multiprocess as mp
+import multiprocessing as mp
 import subprocess 
 from pathlib import Path
 
@@ -35,17 +41,23 @@ if __name__ == '__main__':
     if not InFileName.exists():
         print("The input file doesn't exist!")
     else:
-        seq_nums = subprocess.check_output(
+        seq_nums = int(subprocess.check_output(
             "less {} | grep '>' | wc -l".format(str(InFileName)),
-            shell=True)
+            shell=True))
         # Divide the file into 'args.cores' parts 
         chunk_size = int(seq_nums / args.cores)
         chunk_seeks = subprocess.check_output(
-            #"less {} | grep -b '>' | awk '{FS=}{print $1}'",
-            shell=True)
+            "less {} | grep -b '>' | awk '{{FS=\":\"}}{{if(NR%{}==0){{print $1}}}}'".format(
+                str(InFileName),
+                chunk_size),
+            shell=True).decode("utf-8").split("\n")[:-1]
+        # Turn 'str' into 'int' list
+        chunk_seeks = [int(X) for X in chunk_seeks]
 
         pool = mp.Pool(args.cores)
         seq_list = mp.Manager().list()
+        jobs = []
+
         for chunk_seek in chunk_seeks:
             jobs.append(pool.apply_async(process_wrapper,
                 (chunk_seek,chunk_size,seq_list,InFileName,OutFileName)))
