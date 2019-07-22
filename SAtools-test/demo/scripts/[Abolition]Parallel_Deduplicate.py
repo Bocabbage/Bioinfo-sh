@@ -1,5 +1,5 @@
 # Can be replaced simply by :
-# awk '/^>/{f=!d[$1];d[$1]=1}f' $input > $ output
+# awk '/^>/{f=!d[$1];d[$1]=1}f' $input > $output
 # and the awk command is much moooooooooore faster.
 
 # "I'm a foolish man with only a hummer named python, my BRO."
