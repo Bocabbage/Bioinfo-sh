@@ -1,4 +1,4 @@
-# ShellScripts using in Bioinformatics Analysis
+# ShellScripts: Bioinformatics
 
 ## Contents
 
