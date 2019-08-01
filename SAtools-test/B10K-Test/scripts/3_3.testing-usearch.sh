@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # Script: testing.sh
 # Description: Do alignment using usearch
-# Usage: bash 3.testing-usearch.sh [query-length] [subsample seed] [Unique ID]
+# Usage: bash 3_3.testing-usearch.sh [query-length] [subsample seed] [Unique ID]
 # Update date: 2019/07/24
 # Author: Zhuofan Zhang
 
