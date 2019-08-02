@@ -23,7 +23,7 @@ fi
 
 for i in `seq 1 3`
 do
-    qsub -cwd -l vf=4G,num_proc=10 -binding linear:1 -q hadoop_blast.q \
+    qsub -cwd -l vf=4G,num_proc=10 -binding linear:1 -q blast.q \
          -v qlen=$QLEN,seed=$SEED,id=$ID $WORKPATH/B10K-Test/scripts/3_${i}.testing-${tools[$($i-1)]}.sh
 done
 
