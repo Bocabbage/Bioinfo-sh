@@ -21,7 +21,7 @@ def train(InputFile,OutputModel):
     SVM = svm.SVC()
     SVM.fit(tr_data,tr_label)
     # Save the model
-    dump(SVM, OutputModel)
+    dump(SVM, "{}.m".format(OutputModel))
 
 
 
