@@ -6,7 +6,7 @@
 import argparse
 from sklearn.preprocessing import StandardScaler,Normalizer
 from sklearn import svm
-from joblib import dump,load
+from sklearn.externals import joblib
 import numpy as np
 
 def train(InputFile,OutputModel):
@@ -21,7 +21,7 @@ def train(InputFile,OutputModel):
     SVM = svm.SVC()
     SVM.fit(tr_data,tr_label)
     # Save the model
-    dump(SVM, "{}.m".format(OutputModel))
+    joblib.dump(SVM, "{}.m".format(OutputModel))
 
 
 
