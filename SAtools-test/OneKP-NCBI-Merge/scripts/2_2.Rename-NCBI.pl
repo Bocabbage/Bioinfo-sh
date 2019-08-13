@@ -1,8 +1,12 @@
 #!/usr/bin/perl -w 
 # Script: Rename-NCBI.pl
 # Usage: perl -w 2_2.Rename-NCBI.pl <infile.fa> <outfile.fa>
-# Update date: 2019/08/08
+# Update date: 2019/08/13
 # Author: Zhuofan Zhang
+
+# FORMAT:
+# >lcl|NC_XXXXXX.X_[x]+_NP_YYYYYY.Y_Z-Species [..] [..] [[..]...]
+
 use strict;
 # use Data::Dumper;
 @ARGV == 3 or die "Usage: perl -w 2_2.Rename-NCBI.pl <infile.fa> <outfile.fa> <NCBIid2Species.list>";
@@ -36,8 +40,7 @@ while(<IFILE>)
     if(m/^>/)
     {
        chomp;
-       $_ =~ m/NC_[0-9]+\.+?/;
-       my $NCID = substr $&,0,-1;
+       $_ =~ m/NC_[0-9]+/;
        # print "$NCID\n";
        $_ =~ m/ \[.*/;
        print OFILE "$`-$id2sp{$NCID}$&\n";

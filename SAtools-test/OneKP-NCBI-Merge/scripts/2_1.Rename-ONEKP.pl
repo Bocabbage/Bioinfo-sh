@@ -1,9 +1,12 @@
 #!/usr/bin/perl -w
 # Script: Rename-Onekp.pl
 # Usage: perl -w Rename-Onekp.pl <infile.fa> <outfile.fa>
-# Update date: 2019/08/07
+# Update date: 2019/08/13
 # Author: Zhuofan Zhang
 use strict;
+
+# FORMAT:
+# >gnl|onekp|Onekp4Code-OnekpID-Species
 
 @ARGV == 2 or die " Usage: perl -w Rename-Onekp.pl <infile.fa> <outfile.fa> .";
 
