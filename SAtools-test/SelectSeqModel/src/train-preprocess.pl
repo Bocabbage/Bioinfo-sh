@@ -41,9 +41,9 @@ while(<RESULT>)
     my @fields = split "\t";
     my ( $evalue,$score,$id ) = $fields[10,11,2];
 
-    $fields[0] ~= m/\|(\w)+?\./;
+    $fields[0] =~ m/\|(\w)+?\./;
     my qsp = $id2sp{substr($&,1,-1)};
-    $fields[1] ~= m/-(\w)+-/;
+    $fields[1] =~ m/-(\w)+-/;
     my ssp = substr($&,1,-1);
     my $label =qsp eq ssp ? 1 : 0;
 
