@@ -1,9 +1,10 @@
 # Script: BuildIndex.py
 # Description: Build bytes-off dict for a FASTA file
-# Update date: 2019/08/22
+# Update date: 2019/08/26
 # Author: Zhuofan Zhang
 import os
-import pickle
+#import pickle
+import json
 import re
 import subprocess
 import argparse
@@ -25,16 +26,17 @@ def BuildIndex(FAdir,outfilename):
     for header in Headers:
         Pair = Pattern.search(header)
         Offset_Dict[Pair.group('seqname')]=Pair.group('offset')
-    ofile_name = os.path.dirname(FAfile) + '/' + outfilename + '.pkl'
+    ofile_name = os.path.dirname(FAfile) + '/' + outfilename + '.json'
     #print(ofile_name)
     #print(Offset_Dict)
     with open(ofile_name,'wb') as ofile:
-        pickle.dump(Offset_Dict,ofile)
+        #pickle.dump(Offset_Dict,ofile)
+        json.dump(Offset_Dict,ofile)
 
 if __name__ == '__main__':
     Parser = argparse.ArgumentParser()
     Parser.add_argument('-d',help="FASTA file complete path.")
-    Parser.add_argument('-id',help="Index file name.(eg: input:xx and you will get xx.pkl in"
+    Parser.add_argument('-id',help="Index file name.(eg: input:xx and you will get xx.json in"
                                    " the same dir as the input FASTA)")
     args = Parser.parse_args()
 

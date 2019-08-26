@@ -55,6 +55,8 @@ if __name__ == '__main__':
         chunk_seeks = [int(X) for X in chunk_seeks]
 
         pool = mp.Pool(args.cores)
+        # Manager method is slower than 'share memory' way
+        # like using mp.Array
         seq_list = mp.Manager().list()
         jobs = []
 
