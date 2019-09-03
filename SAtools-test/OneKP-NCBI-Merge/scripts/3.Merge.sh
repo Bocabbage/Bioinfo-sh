@@ -19,6 +19,9 @@ fi
 for file in $PFILE
 do
     # PTARGET and NTARGET have the same dir-struct.
-    #cat $NTARGET/$file/*-rename.fa >> $NMERGE/onekp-ncbi-nucl.fa
+    cat $NTARGET/$file/*-rename.fa >> $NMERGE/onekp-ncbi-nucl.fa
     cat $PTARGET/$file/*-rename.prot.fa >> $PMERGE/onekp-ncbi-prot.fa
-done
+done && \ 
+
+echo "FINISH!"
+
