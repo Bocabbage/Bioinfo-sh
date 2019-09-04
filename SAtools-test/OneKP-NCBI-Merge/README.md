@@ -21,20 +21,20 @@
 
 ```
 # CDS
->gnl|onekp|cds|[4chars'ONEKP_ID]-[Seq_ID]-[Species_Name]-[taxid]
+>gnl|onekp|cds|[4chars'ONEKP_ID]-[Seq_ID]-[taxid]
 
 # Prot 
->gnl|onekp|prot|[4chars'ONEKP_ID]-[Seq_ID]-[Species_Name]-[taxid]
+>gnl|onekp|prot|[4chars'ONEKP_ID]-[Seq_ID]-[taxid]
 ```
 
 #### NCBI-data
 
 ```
 # CDS
->lcl|[NC_ID]_cds_[NP_ID]-[Species_Name]-[taxid] { [annotation1] ... }
+>lcl|[NC_ID]_cds_[NP_ID]-[taxid] { [annotation1] ... }
 
 # Prot
->lcl|[NC_ID]_prot_[NP_ID]-[Species_Name]-[taxid] { [annotation1] ... }
+>lcl|[NC_ID]_prot_[NP_ID]-[taxid] { [annotation1] ... }
 ```
 
 
@@ -50,7 +50,7 @@
   - 以`-A,-B`等为后缀的多样本pooling（可能存在弃用数据）
   - 同一物种的不同样本测序pooling（OneKP物种映射表中区分为不同物种）
 
-  多样本中可能存在弃用数据**(3.2.3)**
+  多样本中可能存在弃用数据(3.2.3)
 
 - **未确定物种样本**
 
@@ -134,9 +134,9 @@
 
 ​	![workflow](./pics/workflow.png)
 
-- 为合并数据构建taxid映射表目的是在BLAST建库时能映射序列到其对应物种的信息，实现搜索范围的限制功能**（未确定：不能确定物种的样本如何标注？暂定弃用）**
+- 为合并数据构建taxid映射表目的是在BLAST建库时能映射序列到其对应物种的信息，实现搜索范围的限制功能（未确定：不能确定物种的样本如何标注？暂定弃用）
 
-- 为分样本建立索引：每个分样本具有序列-偏移量索引表，提高后续多序列比对时寻找Target对应序列的速度**（曾进行pickle二进制压缩存储的方案，速度较慢，暂定以json模式存储）**
+- 为分样本建立索引：每个分样本具有序列-偏移量索引表，提高后续多序列比对时寻找Target对应序列的速度（曾进行pickle二进制压缩存储的方案，速度较慢，暂定以json模式存储）
 
 - BLAST比对产生结果的`output-format`可以进行一定程度的定制，可进行评估确认是否足以满足后续多序列比对所需信息的需求，则有可能减省建索引的步骤。定制命令规格如下例：
 
@@ -153,3 +153,4 @@
   - requests
   - html5lib
 - **perl 5.22**
+
