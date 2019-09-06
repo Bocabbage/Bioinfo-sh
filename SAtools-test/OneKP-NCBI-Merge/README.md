@@ -8,9 +8,10 @@
 
 
 
-## 1. 原始数据构成
+## 1. 数据构成
 
-- OneKP-Project:  1,462个CDS样本数据库 + 1422个Protein样本数据库
+- OneKP-Project:  1,462个Nucl样本数据库 + 1422个Protein样本数据库
+  - 实际使用数据：1304个Nucl样本数据库 + 1283个Protein样本数据库
 - NCBI: 引入([Soltis D E, et al. 2018](https://bsapubs.onlinelibrary.wiley.com/doi/full/10.1002/ajb2.1071))中与OneKP-ID有对应关系的样本数据
 
 
@@ -21,10 +22,10 @@
 
 ```
 # CDS
->gnl|onekp|cds|[4chars'ONEKP_ID]-[Seq_ID]-[taxid]
+>gnl|onekp|cds_[4chars'ONEKP_ID]-[Seq_ID]-[taxid]
 
 # Prot 
->gnl|onekp|prot|[4chars'ONEKP_ID]-[Seq_ID]-[taxid]
+>gnl|onekp|prot_[4chars'ONEKP_ID]-[Seq_ID]-[taxid]
 ```
 
 #### NCBI-data
@@ -146,11 +147,45 @@
 
   
 
-## 5.数据整合工具
+## 5. 数据整合工具
 
 - **python 3.7** 
   - BeautifulSoup4
   - requests
   - html5lib
 - **perl 5.22**
+- **shell-scripts**
+
+
+
+## 6. 遗留问题及注意点
+
+- 最终进度为将Merge后的Nucl/Prot更换为最终规范的命名并建立Blast索引完成，但是每个分样本仍为中间版本的命名法，需进行修正（在`Doc/scripts/CorrectTemp`中保有修正脚本）
+- 有些在本次清洗中忽略的数据或许是可以使用的，可以与数据库负责人进一步沟通确定后再引入
+  -    OneKP: combined 样本
+  -    OneKP: Rawdata 样本目录名中带有如`Oenothera_laciniata`这样含有多个疑似同物种的样本，但因特殊原因【不明】区分了物种名
+  -    Unknown样本，不能确定taxid的样本...
+
+- 爬取表格的过程是在Windows环境下进行的，因此提取数据时注意将行末尾`\r`进行处理
+
+## 7. 路径说明
+
+```txt
+# 主目录： /hwfssz1/BIGDATA_COMPUTING/liwenhui/1.Etools/1.SAtools/OneKP/MergeDB
+
+./
+|___ Merge-NUCL	// 完成建库的Merge-Nucl-FASTA
+|___ Merge-PROT // 完成建库的Merge-Prot-FASTA
+|___ NuclDB		// ONEKP样本FASTA及加入的NCBI的FASTA独立文件，‘ProtDB’同
+|___ ProtDB
+|___ Doc		// 说明文档及workflow脚本
+	  |
+	  |___ GetSpecies_Taxid 				// 爬虫脚本、OneKP数据问题完整表格
+	  |___ [NCBI/ONEKP]_Final_Use_List.csv  // 最终使用的样本物种列表
+	  |___ scripts						    // workflow脚本
+	  		 |__ ...
+	  		 |__ Log
+	  		 |__ OldVersion_scripts			// 部分弃用的老版本脚本
+	  		 |__ CorrectTemp				// 实际建库时进行debug留下的脚本
+```
 

@@ -1,13 +1,13 @@
 #!/usr/bin/perl -w
 # Script: Rename-Onekp.pl
 # Usage: perl -w Rename-Onekp.pl <infile.fa> <outfile.fa> [species] [taxid] [cds/prot]
-# Update date: 2019/09/02
+# Update date: 2019/09/06
 # Author: Zhuofan Zhang
 use strict;
 
-@ARGV == 5 or die " Usage: perl -w Rename-Onekp.pl <infile.fa> <outfile.fa> [species] [taxid] [cds/prot].";
+@ARGV == 4 or die " Usage: perl -w Rename-Onekp.pl <infile.fa> <outfile.fa>[taxid] [cds/prot].";
 
-my ($ifile,$ofile,$species,$taxid,$type) = @ARGV;
+my ($ifile,$ofile,$species,$type) = @ARGV;
 open IFILE,"<$ifile" or die "$!";
 open OFILE,">$ofile" or die "$!";
 
@@ -20,7 +20,7 @@ while(<IFILE>)
         my $OnekpTag = $+{okp_tag};
         my $Species=$';
 
-        print OFILE ">gnl|onekp|$type|$OnekpTag-$species-$taxid\n";
+        print OFILE ">gnl|onekp|$type_$OnekpTag-$taxid\n";
    }
    else
    {

@@ -27,6 +27,7 @@ if($mode eq 'onekp')
         if(/^>/)
         {
             chomp;
+            $_ =~ s/^>//g;
             print "$_ $taxid\n";
         }
 
@@ -40,7 +41,8 @@ elsif($mode eq 'ncbi')
         {
            chomp;
            $_ =~ /(?<SEQID>.*)-(?<TAXID>[0-9]+)\s\[/;
-           print "$+{SEQID} $+{TAXID}\n";
+           my $seqid = $+{SEQID} =~ s/^>//r;
+           print "$seqid $+{TAXID}\n";
         }
     
     }

@@ -5,8 +5,8 @@
 # Author: Zhuofan Zhang
 PROTDB=/zfssz3/NGB_DB/shenweiyan/backupDB/OneKP/ProtSeq
 NUCLDB=/zfssz3/NGB_DB/shenweiyan/backupDB/OneKP/RawNuclSeq
-NDUPLIST=nucl.dup.lst
-PDUPLIST=prot.dup.lst
+NDUPLIST=./Log/nucl.dup.lst
+PDUPLIST=./Logprot.dup.lst
 
 PFILES=$( ls $PROTDB )
 #echo "######## PROT ########" > $DUPLIST
@@ -20,6 +20,8 @@ done
 #echo "######################" >> $DUPLIST
 
 #echo "######## NUCL ########" >> $DUPLIST
+### noted that NO DUPLICATION in Onekp-nucl database.
+### So I have removed the empty Logfile.
 NFILES=$( ls $NUCLDB )
 for file in $NFILES
 do

@@ -1,6 +1,6 @@
 #!/usr/bin bash
 # Script: Intergrate.sh
-# Description: Copy the OneKP/NCBI database, rename them in a new rule and deduplicate.
+# Description: Copy the OneKP/NCBI database, rename the dirname in a new rule and deduplicate.
 # Update date: 2019/08/07
 # Author: Zhuofan Zhang
 
@@ -42,10 +42,10 @@ mv /hwfssz1/BIGDATA_COMPUTING/liwenhui/1.Etools/1.SAtools/OneKP/1KP_Plastid/data
 mv /hwfssz1/BIGDATA_COMPUTING/liwenhui/1.Etools/1.SAtools/OneKP/1KP_Plastid/data/NCBI/ncbi.nc.prot.fasta $PTARGET/ncbi-ALL
 
 # As the result of 0.Check-dup.sh shows, only the ONEKP-PROT-DATABASE have duplicated sequences.
-#for file in $PFILES
-#do
-    #awk '/^>/{f=!d[$1];d[$1]=1}f' $PTARGET/onekp-${file}/${file}-SOAPdenovo-Trans-assembly.prot.fa > $PTARGET/onekp-${file}-SOAPdenovo-Trans-assembly.prot.dedup
-#    mv -f $PTARGET/onekp-${file}-SOAPdenovo-Trans-assembly.prot.dedup $PTARGET/onekp-${file}/${file}-SOAPdenovo-Trans-assembly.prot.fa
-#done
+for file in $PFILES
+do
+    awk '/^>/{f=!d[$1];d[$1]=1}f' $PTARGET/onekp-${file}/${file}-SOAPdenovo-Trans-assembly.prot.fa > $PTARGET/onekp-${file}-SOAPdenovo-Trans-assembly.prot.dedup
+    mv -f $PTARGET/onekp-${file}-SOAPdenovo-Trans-assembly.prot.dedup $PTARGET/onekp-${file}/${file}-SOAPdenovo-Trans-assembly.prot.fa
+done
 
 

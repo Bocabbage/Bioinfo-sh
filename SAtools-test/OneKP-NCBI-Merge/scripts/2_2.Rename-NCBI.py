@@ -5,7 +5,7 @@
 #              ">lcl|[NC_ID]_xxx_[NP_ID]-[Species_Name]"
 #              and this script will add [taxid] to it and move out those sequences
 #              that can't map to proper ID.
-# Update date: 2019/09/03
+# Update date: 2019/09/06
 # Author: Zhuofan Zhang
 
 import argparse
@@ -35,7 +35,7 @@ with open(args.i,'r') as ifile:
             seq_sp = seq_SPpattern.search(rline).group('seq_sp')
             if(seq_sp in Species2Taxid.keys()):
                 Filt_No = True
-                wpart = '{}-{}'.format(seq_sp,Species2Taxid[seq_sp].strip())
+                wpart = '{}'.format(Species2Taxid[seq_sp].strip())
                 wline = re.sub(r'-(?P<seq_sp>[a-zA-Z_\.]+) ','-{} '.format(wpart),rline)
                 #print(wpart)
                 ofile.write(wline)
