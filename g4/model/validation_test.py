@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # Script:       validation_test.py
 # Description:  wrap the different validation and test-result visualization
-# Update date:  2019/12/26
+# Update date:  2019/12/30
 # Author:       Zhuofan Zhang
 
 from sklearn.model_selection import KFold, cross_val_score
@@ -25,24 +25,24 @@ def Kfold_cross_validation(clf, X, y, nsplits=5, random_state=42, shuffle=True):
     kf = KFold(n_splits=n_splits, random_state=random_state, shuffle=shuffle)
     return __Kfold_mean_score(clf, X, y, kf)
 
-def ROC_plot(clf, X, y, res_pic, clf_name, n_splits=5, random_state=42, shuffle=True):
+def ROC_plot(clf, X, y, ax, clf_name, n_splits=5, random_state=42, shuffle=True):#  res_pic,
     '''
         get roc curve saved in res_pic.
         return:
             AUC list, TPR list
     '''
-
     tprs = []
     aucs = []
     mean_fpr = np.linspace(0, 1, 100)
-    fig, ax = plt.subplots()
+    # fig, ax = plt.subplots()
 
     kf = KFold(n_splits=n_splits, random_state=random_state, shuffle=shuffle)
     for i, (train, test) in enumerate(kf.split(X, y)):
         clf.fit(X[train], y[train])
+        acc = accuracy_score(y[test], clf.predict(X[test]))
         viz = plot_roc_curve(
                              clf, X[test], y[test],
-                             name="ROC fold {}".format(i),
+                             name="ROC fold {}: ACC={}".format(i, acc),
                              alpha=0.3, lw=1, ax=ax
                             )
         interp_tpr = interp(mean_fpr, viz.fpr, viz.tpr)
@@ -71,7 +71,7 @@ def ROC_plot(clf, X, y, res_pic, clf_name, n_splits=5, random_state=42, shuffle=
     ax.set(xlim=[-0.05, 1.05], ylim=[-0.05, 1.05],
            title="Receiver operating characteristic curve:{}".format(clf_name))
     ax.legend(loc="lower right")
-    fig.savefig(res_pic)
+    # fig.savefig(res_pic)
 
     return aucs, tprs
 

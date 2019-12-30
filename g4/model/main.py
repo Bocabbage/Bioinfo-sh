@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # Script:       main.py
 # Description:  MAIN function of the VG4-predictor
-# Update date:  2019/12/27(unfinished)
+# Update date:  2019/12/30
 # Author:       Zhuofan Zhang
 '''
     Notes that this script is a temporary one.
@@ -12,6 +12,7 @@
 
 from dataset import G4_dataset
 from validation_test import ROC_plot, Kfold_cross_validation, ROC_test_plot
+import matplotlib.pyplot as plt
 from sklearn.model_selection import KFold, cross_val_score
 import pandas as pd
 import numpy as np
@@ -22,9 +23,7 @@ from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 
-# Parameters
-RANDOM_STATE = 42
-KFOLD = 5
+
 
 # Arguments-Parsing
 parser = argparse.ArgumentParser()
@@ -32,14 +31,31 @@ parser.add_argument('--vg4', help="VG4-ATAC overlapped CSV file.")
 parser.add_argument('--ug4', help="UG4-ATAC overlapped CSV file.")
 parser.add_argument('--kfroc', default="./KFold_ROC", help="output kfold-validation-ROC curve picture file name.")
 parser.add_argument('--testroc', default="./test_ROC", help="output test-ROC curve picture file name.")
+parser.add_argument('--seed', default=42, type=int, help="int random-seed.")
+parser.add_argument('--kfold', default=5, type=int, help="k of 'KFOLD'.")
+parser.add_argument('--test_size', default=0.25, type=float, help="frac of the test size in all dataset.")
+
+# Mix features
+parser.add_argument('--newvg4', default="")
+parser.add_argument('--newug4', default="")
+parser.add_argument('--mix', default=0, type=int, help="when positive, the 'newXg4's work.(default:0)")
+
+
 args = parser.parse_args()
 
+# Parameters
+RANDOM_STATE = args.seed
+KFOLD = args.kfold
+TEST_SIZE = args.test_size
+
 # Load Data
-g4_dataset = G4_dataset(args.vg4, args.ug4, random_state=RANDOM_STATE)
-train_data = g4_dataset.get_training_set(trainset_size=8000,random_state=RANDOM_STATE)
+g4_dataset = G4_dataset(args.vg4, args.ug4, args.newvg4, args.newug4, args.mix)#, random_state=RANDOM_STATE)
+train_data, test_data = g4_dataset.get_train_test_set(test_size = TEST_SIZE, random_state=RANDOM_STATE, shuffle=True)
+# train_data = g4_dataset.get_training_set(trainset_size=8000,random_state=RANDOM_STATE)
+# test_data = g4_dataset.get_test_set(testset_size=8000,test_random_state=RANDOM_STATE)
 train_labels = train_data.pop('Label')
-test_data = g4_dataset.get_test_set(testset_size=8000,test_random_state=RANDOM_STATE)
 test_labels = test_data.pop('Label')
+
 
 # Hyper-parameters
 xgb_params = {
@@ -66,7 +82,7 @@ rf_params = {
 lr_params = {
                 'random_state':RANDOM_STATE,
                 'penalty':'l2',
-                'C':1    
+                'C':1.0    
             }
 
 # Classfiers
@@ -88,14 +104,19 @@ Classifiers = {
                 'logistic regression':lr
               }
 
-
-for (clf_name, clf) in Classifiers.items():
+kfroc_name = args.kfroc + "_randomstate{}.png".format(RANDOM_STATE)
+fig = plt.figure(1)
+fig.set_size_inches(18.5, 10.5)
+for i, (clf_name, clf) in enumerate(Classifiers.items(), 1):
+    ax = fig.add_subplot(2,2,i)
     kfroc_name = args.kfroc + "_{}_randomstate{}.png".format(clf_name, RANDOM_STATE)
-    testroc_name = args.testroc + "_{}_randomstate{}.png".format(clf_name, RANDOM_STATE)
-    # 5-Fold Validation ROC
-    ROC_plot(clf, train_data.to_numpy(), train_labels.to_numpy(), 
-             n_splits=5, res_pic=kfroc_name, clf_name = clf_name)
+    # K-Fold Validation ROC
+    ROC_plot(clf, train_data.to_numpy(), train_labels.to_numpy(), ax=ax,  
+             n_splits=KFOLD, clf_name = clf_name)#, res_pic=kfroc_name)
+fig.savefig(kfroc_name,dpi=100)
 
+
+testroc_name = args.testroc + "_{}_randomstate{}.png".format(clf_name, RANDOM_STATE)
 # Test score and ROC
 ROC_test_plot(Classifiers, X=train_data.to_numpy(), y=train_labels.to_numpy(),
               X_test=test_data.to_numpy(), y_test=test_labels.to_numpy(), res_pic=testroc_name)
