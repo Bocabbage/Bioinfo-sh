@@ -1,5 +1,5 @@
 #! /usr/bin/env python
-# Update date: 2020/09/14
+# Update date: 2020/09/17
 # Author: Zhuofan Zhang
 from email.mime.text import MIMEText
 from email.header import Header
@@ -14,7 +14,12 @@ def autoSendIp(sendEmail, sendEmailPassword, dstEmail, ipCache):
     '''
     newIP = IPchangeCheck(ipCache)
     if newIP is not None:
-        sendIpEmail(sendEmail, sendEmailPassword, dstEmail, newIP)
+        sendSuccess = sendIpEmail(sendEmail, sendEmailPassword, dstEmail, newIP)
+
+    if sendSuccess:
+        with open(ipCache, 'w') as cacheFile:
+            cacheFile.write(newIP)
+
 
 
 def sendIpEmail(sendEmail, sendQQAuthorization, dstEmail, newIP):
@@ -34,8 +39,10 @@ def sendIpEmail(sendEmail, sendQQAuthorization, dstEmail, newIP):
         smtpObj.login(sendEmail, sendQQAuthorization)
         smtpObj.sendmail(sendEmail, dstEmail, msg.as_string())
         print("Email sending success.")
+        return True
     except smtplib.SMTPException:
         print("Email sending failed.")
+        return False
 
 
 def getNowIP():
@@ -63,11 +70,10 @@ def IPchangeCheck(ipCache):
 
     newIP = getNowIP()
     if newIP != oldIP:
-        with open(ipCache, 'w') as cacheFile:
-            cacheFile.write(newIP)
         return newIP
 
     return None
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
